@@ -5,7 +5,7 @@ pipeline {
         DOCKER_HUB_CREDENTIALS = ""
         DOCKER_IMAGE = ""
         DOCKER_TAG = "${env.BUILD_ID}"
-        SLACK_CHANNEL = ""
+        SLACK_CHANNEL = "devopsdemo"
         def dockerImage = ""
     }
     stages {
@@ -13,7 +13,7 @@ pipeline {
             steps {
                 echo "### Running Build stage ..."
                 echo "Build number = #${DOCKER_TAG}"
-                //slackSend channel: "${SLACK_CHANNEL}", color: "#439FE0", message: "Build Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+                slackSend channel: "${SLACK_CHANNEL}", color: "#439FE0", message: "Build Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
                 echo "*** Nothing to build, skipping ... ***"
                 echo "### Build stage done"
             }
@@ -31,12 +31,12 @@ pipeline {
             echo "Pipeline finished"
         }
         success {
-            //slackSend channel: "${SLACK_CHANNEL}", color: "#439FE0", message: "Pipeline ${currentBuild.fullDisplayName} completed successfully, look at the build @ ${env.BUILD_URL}"
+            slackSend channel: "${SLACK_CHANNEL}", color: "#439FE0", message: "Pipeline ${currentBuild.fullDisplayName} completed successfully, look at the build @ ${env.BUILD_URL}"
             //mail to: 'simone.bonetti@it.ibm.com', subject: "Pipeline ${currentBuild.fullDisplayName} completed successfully !!!", body: "Pipeline completed successfully, have a look at the build @ ${env.BUILD_URL}"
             echo "SUCCESS!"
         }
         failure {
-            //slackSend channel: "${SLACK_CHANNEL}", color: "#439FE0", message: "Pipeline ${currentBuild.fullDisplayName} completed with errors, look at the build @ ${env.BUILD_URL}"
+            slackSend channel: "${SLACK_CHANNEL}", color: "#439FE0", message: "Pipeline ${currentBuild.fullDisplayName} completed with errors, look at the build @ ${env.BUILD_URL}"
             echo "FAILURE!"
         }
     }
