@@ -25,16 +25,16 @@ pipeline {
                 echo "### Test stage done"
             }
         }
-    }
-    stage('Docker Build') {
-        steps {
-            echo "### Running Docker Build stage ..."
-            script {
-                dockerImage = docker.build("${DOCKER_IMAGE}:${DOCKER_TAG}",".")
+        stage('Docker Build') {
+            steps {
+                echo "### Running Docker Build stage ..."
+                script {
+                    dockerImage = docker.build("${DOCKER_IMAGE}:${DOCKER_TAG}",".")
+                }
+                echo "### Docker build stage done"
             }
-            echo "### Docker build stage done"
         }
-    }
+    }    
     post {
         always {
             echo "Pipeline finished"
