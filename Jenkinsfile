@@ -33,9 +33,11 @@ pipeline {
         success {
             //slackSend channel: "${SLACK_CHANNEL}", color: "#439FE0", message: "Pipeline ${currentBuild.fullDisplayName} completed successfully, look at the build @ ${env.BUILD_URL}"
             //mail to: 'simone.bonetti@it.ibm.com', subject: "Pipeline ${currentBuild.fullDisplayName} completed successfully !!!", body: "Pipeline completed successfully, have a look at the build @ ${env.BUILD_URL}"
+            echo "SUCCESS!"
         }
         failure {
             //slackSend channel: "${SLACK_CHANNEL}", color: "#439FE0", message: "Pipeline ${currentBuild.fullDisplayName} completed with errors, look at the build @ ${env.BUILD_URL}"
+            echo "FAILURE!"
         }
     }
 }
