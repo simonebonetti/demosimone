@@ -1,0 +1,16 @@
+{
+  "name": "mysimpleapp",
+  "private": false,
+  "version": "1.0.0",
+  "description": "Basic simple application just to start deploying on Kubernetes",
+  "loggerLevel": "debug",
+  "scripts": {
+    "start": "node app"
+  },
+  "dependencies": {
+    "express": "4.16.0",
+    "request": "2.63.0",
+    "log4js":"2.5.3",
+    "connect-timeout":"1.9.0"
+  }
+}

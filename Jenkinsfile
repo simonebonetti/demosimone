@@ -3,7 +3,7 @@ pipeline {
     environment {
         WORKDIR = ""
         DOCKER_HUB_CREDENTIALS = ""
-        DOCKER_IMAGE = ""
+        DOCKER_IMAGE = "simonebonetti/mysimpleapp"
         DOCKER_TAG = "${env.BUILD_ID}"
         SLACK_CHANNEL = "devopsdemo"
         def dockerImage = ""
@@ -24,6 +24,15 @@ pipeline {
                 echo "*** No test scripts found, skipping ... ***"
                 echo "### Test stage done"
             }
+        }
+    }
+    stage('Docker Build') {
+        steps {
+            echo "### Running Docker Build stage ..."
+            script {
+                dockerImage = docker.build("${DOCKER_IMAGE}:${DOCKER_TAG}",".")
+            }
+            echo "### Docker build stage done"
         }
     }
     post {
